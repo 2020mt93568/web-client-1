@@ -4,7 +4,7 @@ export const Footer = () => {
     return (
         <AppBar color="default" position="relative" >
             <Toolbar variant="dense">
-                &copy; 2021, All rights reserved, To Do App.
+                &copy; 2022, All rights reserved, To Do App.
             </Toolbar>
         </AppBar>
     );

@@ -1,11 +1,11 @@
 export namespace NValidator {
 
-    export const isNameValid = (name: string): boolean => {
-        if (!name) {
+    export const isUsernameValid = (username: string): boolean => {
+        if (!username) {
             return true;
         }
-        const re = /^[A-Za-z\s]+$/;
-        return re.test(name);
+        const re = /^[A-Za-z0-9\s]+$/;
+        return re.test(username);
     };
 
     export const isEmailValid = (email: string): boolean => {

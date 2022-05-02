@@ -2,7 +2,7 @@ import { useState } from "react";
 
 import { Button, Card, CardActions, CardContent, CardHeader, TextField, Tooltip } from "@material-ui/core";
 
-import { EMAIL_HELPER_TEXT, NAME_HELPER_TEXT, PASSWORD_HELPER_TEXT } from "../../../constants/Constant";
+import { EMAIL_HELPER_TEXT, USER_NAME_HELPER_TEXT, PASSWORD_HELPER_TEXT } from "../../../constants/Constant";
 import { EAuthenticationMode } from "../../../constants/Enum";
 import { IAuthenticationProp } from "../../../models/PropInterface";
 
@@ -22,12 +22,12 @@ const styles = {
 
 export const Register = (props: IAuthenticationProp) => {
 
-    const [name, setName] = useState("");
+    const [username, setUsername] = useState("");
     const [emailId, setEmailId] = useState("");
     const [password, setPassword] = useState("");
 
     const register = async () => {
-        const payload: IRegisterPayload = { name, emailId, password };
+        const payload: IRegisterPayload = { username, emailId, password };
         console.log(payload);
         const response = await NAuthenticationService.register(payload);
         console.log(response);
@@ -41,14 +41,14 @@ export const Register = (props: IAuthenticationProp) => {
             />
             <CardContent>
                 <TextField
-                    error={!NValidator.isNameValid(name)}
+                    error={!NValidator.isUsernameValid(username)}
                     required
                     fullWidth
-                    label="Name"
+                    label="Username"
                     type="text"
-                    value={name}
-                    onChange={(event) => { setName(event.target.value); }}
-                    helperText={NValidator.isNameValid(name) ? "" : NAME_HELPER_TEXT}
+                    value={username}
+                    onChange={(event) => { setUsername(event.target.value); }}
+                    helperText={NValidator.isUsernameValid(username) ? "" : USER_NAME_HELPER_TEXT}
                     variant="outlined"
                 />
                 <br />
@@ -84,7 +84,7 @@ export const Register = (props: IAuthenticationProp) => {
                         <Button
                             variant="contained"
                             color="primary"
-                            disabled={!name || !emailId || !password || !NValidator.isNameValid(name) || !NValidator.isEmailValid(emailId) || !NValidator.isPasswordValid(password)}
+                            disabled={!username || !emailId || !password || !NValidator.isUsernameValid(username) || !NValidator.isEmailValid(emailId) || !NValidator.isPasswordValid(password)}
                             onClick={() => { register(); }}
                         >
                             Register
