@@ -1,17 +1,15 @@
 const styles = {
     profileContainer: {
-        width: "100%",
-        height: "100%",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center"
+        padding: "16px"
     }
 };
 
 export const Profile = () => {
     return (
         <div style={styles.profileContainer}>
-            Profile
+            <h2>
+                Profile
+            </h2>
         </div>
     );
 };

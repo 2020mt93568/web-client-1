@@ -73,6 +73,11 @@ export const Header = () => {
                     open={open}
                     onClose={handleClose}
                 >
+                    <Tooltip title="Todo">
+                        <Link to="/todo">
+                            <MenuItem onClick={handleClose}>Todo</MenuItem>
+                        </Link>
+                    </Tooltip>
                     <Tooltip title="Pofile">
                         <Link to="/profile">
                             <MenuItem onClick={handleClose}>Profile</MenuItem>

@@ -2,6 +2,7 @@ import { useContext, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 
 import { Button, Card, CardActions, CardContent, CardHeader, TextField, Tooltip } from "@material-ui/core";
+import Alert from '@mui/material/Alert';
 
 import { EMAIL_HELPER_TEXT, PASSWORD_HELPER_TEXT } from "../../../constants/Constant";
 import { AppContext } from "../../../contexts/AppContext";
@@ -32,15 +33,23 @@ export const Login = (props: IAuthenticationProp) => {
     const [emailId, setEmailId] = useState("");
     const [password, setPassword] = useState("");
 
+    const [errorMessage, setErrorMessage] = useState(""); 
+
     const login = async () => {
         const payload: ILoginPayload = { emailId, password };
         console.log(payload);
         const response = await NAuthenticationService.login(payload);
         console.log(response);
-        setToken(response.token);
-        if (location.pathname === "/authentication") {
-            navigate("/home", { replace: true });
+        if(response.token) {
+            setToken(response.token);
+            setErrorMessage("");
+            if (location.pathname === "/authentication") {
+                navigate("/home", { replace: true });
+            }
+        } else if(response.message) {
+            setErrorMessage(response.message);
         }
+        
     };
 
     return (
@@ -74,6 +83,7 @@ export const Login = (props: IAuthenticationProp) => {
                     variant="outlined"
                 />
             </CardContent>
+            {errorMessage ? <Alert severity="error">{errorMessage}</Alert> : null}
             <CardActions style={styles.cardActions} disableSpacing>
                 <Tooltip title="Login">
                     <span>
